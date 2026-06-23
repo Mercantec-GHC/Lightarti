@@ -39,7 +39,7 @@ services:
     volumes:
       - ./projekt:/rails
     ports:
-      - "3000:3000"
+      - "5432:3000"
 
 volumes:
   postgres_data:
