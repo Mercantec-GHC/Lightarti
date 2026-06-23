@@ -4,15 +4,24 @@ class ArtifactsController < ApplicationController
   def index
   end
 
+  def download
+    artifact = Artifact.find(params[:id])
+    send_file artifact.storage_key,
+              filename: artifact.original_filename,
+              type: artifact.content_type,
+              disposition: "attachment"
+  end
+
   def show
+    @artifact = Artifact.find(params[:id])
   end
 
   def create
+    @folder = Folder.find(params[:artifact][:folder_id])
     uuid = SecureRandom.uuid
     uploaded_file = params[:artifact][:file]
-    local_file_path = "/var/lib/lightarti/storage/#{uuid}#{uploaded_file.original_filename}"
-    puts params[:artifact][:folder_id]
-    artifact = Artifact.new(
+    local_file_path = "#{ENV.fetch("LOCAL_FILE_LOCATION")}/#{uuid}#{uploaded_file.original_filename}"
+    @artifact = Artifact.new(
       name: params[:artifact][:name],
       content_type: uploaded_file.content_type,
       storage_key: local_file_path,
@@ -22,8 +31,7 @@ class ArtifactsController < ApplicationController
       original_filename: uploaded_file.original_filename
 
       )
-      puts artifact.inspect
-    if artifact.save
+    if @artifact.save
       FileUtils.cp(uploaded_file.tempfile, local_file_path)
     else
       @artifact = Artifact.new(folder_id: params[:folder_id])
@@ -46,5 +54,10 @@ class ArtifactsController < ApplicationController
   end
 
   def destroy
+    @artifact = Artifact.find(params[:id])
+    if File.exist?(@artifact.storage_key)
+      File.delete(@artifact.storage_key)
+    end
+    @artifact.destroy
   end
 end

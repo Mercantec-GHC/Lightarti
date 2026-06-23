@@ -9,7 +9,12 @@ Rails.application.routes.draw do
       get "close/:id", to: "folders#close", as: :close
     end
   end
-  resources :artifacts
+  resources :artifacts do
+    collection do 
+      get "download/:id", to: "artifacts#download", as: :download
+    end
+  end
+
   resource :user
   resource :session, only: [:new, :create, :destroy]
   

@@ -1,0 +1,36 @@
+= turbo_stream.update "info_frame" do
+  .col-12.col-lg-8.mt-4
+    .card.shadow-sm.border-0
+      .card-header.bg-white.border-bottom
+        .d-flex.justify-content-between.align-items-start.gap-3
+          div
+            h4.card-title.mb-1 = @artifact.name
+            p.text-muted.mb-0.small Artifact details
+
+          span.badge.text-bg-light.border
+            = @artifact.content_type
+
+      .card-body
+        .list-group.list-group-flush.mb-4
+          .list-group-item.px-0.d-flex.justify-content-between.align-items-start.gap-3
+            .text-muted.small Original file name
+            .fw-semibold.text-end = @artifact.original_filename
+
+          .list-group-item.px-0.d-flex.justify-content-between.align-items-start.gap-3
+            .text-muted.small File size
+            .fw-semibold.text-end = number_to_human_size(@artifact.size)
+
+          .list-group-item.px-0.d-flex.justify-content-between.align-items-start.gap-3
+            .text-muted.small Content type
+            .fw-semibold.text-end = @artifact.content_type
+
+          .list-group-item.px-0.d-flex.justify-content-between.align-items-start.gap-3
+            .text-muted.small Owner
+            .fw-semibold.text-end = @artifact.user.user_name
+
+        .d-flex.justify-content-end
+          = link_to download_artifacts_path(@artifact),
+              class: "btn btn-primary d-inline-flex align-items-center gap-2",
+              data: { turbo: false } do
+            span ⬇️
+            span Download

@@ -1,17 +1,11 @@
 = turbo_stream.update "popup" do
   = render "shared/flash"
-  .popup-overlay
+  .popup-overlay#new_artifact
     .card.shadow
       .card-header.d-flex.justify-content-between
         h5.mb-0 Upload Artifact
 
-        / = button_tag "❌",
-        /     type: "button",
-        /     class: "btn btn-sm",
-        /     data: {
-        /       controller: "popup",
-        /       action: "click->popup#close"
-        /     }
+        = button_tag "❌", type: "button", class: "btn btn-sm", data: {controller: "folder-form-removel", action: "click->folder-form-removel#remove", folder_form_removel_id_value: "new_artifact"}
       .card-body
         = form_with model: @artifact, url: artifacts_path, local: false do |form|
           .mb-3

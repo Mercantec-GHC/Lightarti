@@ -19,6 +19,6 @@ RUN bundle install
 
 COPY . .
 
-EXPOSE 7000
+EXPOSE 3333
 
 CMD ["bin/rails", "server", "-b", "0.0.0.0"]

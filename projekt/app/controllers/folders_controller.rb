@@ -11,6 +11,8 @@ class FoldersController < ApplicationController
   end
 
   def destroy
+    @folder = Folder.find(params[:id])
+    @folder.destroy!
   end
 
   def create

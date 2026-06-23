@@ -1,5 +1,6 @@
 class Folder < ApplicationRecord
   validates :name, presence: true
+  has_many :artifacts, dependent: :destroy
   has_many :folder_permissions, dependent: :destroy
   has_many :users, through: :folder_permissions
   belongs_to :parent,

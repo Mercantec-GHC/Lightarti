@@ -1,1 +1,4 @@
 .env
+projekt/tmp/*
+projekt/log/*
+projekt/storage/*

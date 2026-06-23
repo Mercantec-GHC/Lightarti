@@ -3,8 +3,7 @@
   .d-flex.col-12.justify-content-center
     h1.text-center Welcome to Lightarti
   .d-flex.mt-4
-    = turbo_frame_tag "folder", src: folders_path, class: "col-4" do
+    = turbo_frame_tag "folder", src: folders_path, class: "col-4 p-3 shadow-xl " do
       h1 Loading folders...
-    / = turbo_frame_tag "test", src: folder_path(1), class: "col-8" do
-    /   h1 Loading test..., 
+    = turbo_frame_tag "info_frame", class: "mt-4 col-8 d-flex justify-content-center" do
     
