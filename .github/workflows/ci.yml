@@ -28,3 +28,4 @@ jobs:
 
       - name: Run RSpec in Docker
         run: docker compose run --rm rails bundle exec rspec 
+        
