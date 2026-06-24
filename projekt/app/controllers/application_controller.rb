@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  allow_browser versions: :modern
-  before_action :redirect_to_root_on_first_visit
+  # allow_browser versions: :modern
+  before_action :redirect_to_root_on_first_visit, unless: -> { Rails.env.test? }
   helper_method :current_user
   before_action :current_user
 

@@ -2,3 +2,4 @@
 projekt/tmp/*
 projekt/log/*
 projekt/storage/*
+projekt/vendor/bundle

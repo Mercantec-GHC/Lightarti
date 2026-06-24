@@ -15,6 +15,14 @@ class SessionsController < ApplicationController
     @user = User.new
   end
 
+  def destroy
+    if session[:user_id] != nil
+      session[:user_id] = nil
+      redirect_to root_path, notice: "Logout successfully! "
+    end
+  end
+  
+
   private
 
   def user_params
