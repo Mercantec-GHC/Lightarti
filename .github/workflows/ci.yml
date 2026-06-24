@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      LOCAL_FILE_LOCATION: ${{ secrets.LOCAL_FILE_LOCATION }}
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      SECRET_KEY_BASE: ci_test_secret_key_base_only_for_testing
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker compose build
+
+      - name: Set up database
+        run: docker compose run --rm rails rails db:prepare
+
+      - name: Run RSpec in Docker
+        run: docker compose run --rm rails bundle exec rspec 
