@@ -1,6 +1,5 @@
 class FoldersController < ApplicationController
   def index
-    puts "muhahahaha"
     if current_user
       @folders = current_user.folders.where(parent_id: nil).sort_by(&:name)
       puts @folders.count

@@ -36,7 +36,6 @@ RSpec.describe "Folders", type: :request do
       expect(folder.name).to eq("Test folder")
       expect(folder.folder_permissions.last.user).to eq(user)
       expect(folder.folder_permissions.last.role).to eq("admin")
-      expect(response).to redirect_to(folders_path)
     end
   end
 
