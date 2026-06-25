@@ -39,8 +39,8 @@ services:
       - /var/lib/lightarti/storage:/var/lib/lightarti/storage
     expose:
     - "3333"
-    # ports:
-    #   - "5555:3333"
+    ports:
+      - "3333:3333"
     environment:
       RAILS_ENV: ${RAILS_ENV}
       DATABASE_URL: ${DATABASE_URL}
