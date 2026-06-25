@@ -1,0 +1,20 @@
+- if @root_folder
+  = turbo_stream.replace "folder-list" do 
+    = turbo_frame_tag "folder-list" do
+      - @folders.each do |folder|
+        = turbo_frame_tag dom_id(folder), class: "d-flex flex-column align-items-end col-12" do
+          = render "folder_item", folder: folder, folder_open: false 
+        
+- else
+  = turbo_stream.replace dom_id(@dom_folder) do
+    = turbo_frame_tag dom_id(@dom_folder), class: "d-flex flex-column align-items-end #{!@dom_folder.parent ? 'col-12' : 'col-11'}" do
+      = render "folder_item", folder: @dom_folder, folder_open: true
+      - @dom_folder.children.each do |sub_folder|
+        = turbo_frame_tag dom_id(sub_folder), class: "d-flex flex-column align-items-end col-11" do
+          = render "folder_item", folder: sub_folder, folder_open: false
+      = turbo_frame_tag dom_id(@folder, :artifacts), class: "col-11  mt-2" do
+        - @dom_folder.artifacts.each do |artifact|
+          = turbo_frame_tag dom_id(artifact), class: "d-flex col-12 justify-content-between" do 
+            = render "artifacts/artifact_view", artifact: artifact
+      .d-flex.flex-column.align-items-start.col-11
+        = link_to "New Artifact",new_artifact_path(folder_id: @folder.id, format: :turbo_stream), class: "btn btn-primary", data: { turbo_prefetch: false }

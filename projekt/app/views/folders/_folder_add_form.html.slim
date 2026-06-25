@@ -1,10 +1,12 @@
-    = form_with model: @folder, class: "d-flex justify-content-between col-11", id: "new-folder-form" do |form|
-      = form.text_field :name, class: "form-control w-50", required: true
-      - if @parent
-        = form.hidden_field :parent_id, value: @parent.id
-      .d-flex
-        = form.submit "✅", class: "btn decoration-none px-0"
-        = button_tag "❌",
-            type: "button",
-            class: "btn px-0",
-            data: {controller: "folder-form-removel", action: "click->folder-form-removel#remove", folder_form_removel_id_value: "new-folder-form"}
+    = turbo_frame_tag "create_folder_form" do
+      = form_with model: @folder, class: "d-flex justify-content-between col-12", id: "new-folder-form" do |form|
+        = form.text_field :name, class: "form-control w-50", required: true
+        - if @parent
+          = form.hidden_field :parent_id, value: @parent.id
+          = form.hidden_field :folder_open, value: @folder_open
+        .d-flex
+          = form.submit "✅", class: "btn decoration-none px-0"
+          = button_tag "❌",
+              type: "button",
+              class: "btn px-0",
+              data: {controller: "folder-form-removel", action: "click->folder-form-removel#remove", folder_form_removel_id_value: "new-folder-form"}
