@@ -1,8 +1,6 @@
 = turbo_stream.replace dom_id(@folder) do
   = turbo_frame_tag dom_id(@folder), class: "d-flex flex-column align-items-end #{@rootfolder ? 'col-12' : 'col-11'}" do
     = render "folder_item", folder: @folder, folder_open: true
-    / .d-flex.flex-column.align-items-start.col-11
-    /   = link_to "New Artifact",new_artifact_path(folder_id: @folder.id, format: :turbo_stream), class: "btn btn-primary", data: { turbo_prefetch: false }
     - @sub_folders.each do |sub_folder|
       = turbo_frame_tag dom_id(sub_folder), class: "d-flex flex-column align-items-end col-11" do
         = render "folder_item", folder: sub_folder, folder_open: false

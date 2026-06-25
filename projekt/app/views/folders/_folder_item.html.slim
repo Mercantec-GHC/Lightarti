@@ -6,4 +6,4 @@
   .d-flex
     = link_to folder_path(folder, format: :turbo_stream), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger text-decoration-none btn p-1" do
       i.bi.bi-trash
-    = link_to "+", new_folder_path(parent_id: folder.id, dom_id: dom_id(folder), format: :turbo_stream), class: "btn decoration-none p-1", data: { turbo_prefetch: false }
+    = link_to "+", new_folder_path(parent_id: folder.id, dom_id: dom_id(folder), folder_open: folder_open, format: :turbo_stream), class: "btn decoration-none p-1", data: { turbo_prefetch: false }
