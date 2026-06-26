@@ -2,10 +2,12 @@
   .d-flex.col-2
     = image_tag "logo.png", alt: "Logo", class: "logo"
   .d-flex.col-8
-    p test
+    p 
   .d-flex.col-2
     - if current_user
       p.me-2 Hello, #{current_user.user_name}!
       = link_to "Logout", session_path, method: :delete, data: { turbo_method: :delete }, class: "btn btn-secondary"
     - else
       = link_to "Login", new_session_path, class: "btn btn-primary"
+  
+  
